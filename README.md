@@ -81,3 +81,12 @@ black, flake8をインストールしていないとvscodeで警告が出るの�
 
 
 （フォーマッターを使わない方は[こちら](https://atmarkit.itmedia.co.jp/ait/articles/1912/10/news045.html)を参考にしてください。）
+
+## kaggle APIを用いたデータのダウンロードのやり方
+
+任意のデータをkaggleからダウンロードして、それをダウンロードフォルダから任意のフォルダに移す...という作業が面倒な場合、
+Kaggle APIを用いて任意のディレクトリにデータを配置することができる。
+
+1. 仮想環境に入って、kaggle APIを使えるようにする(`pip install kaggle`)。
+2. `https://www.kaggle.com/<username>/account`にアクセスし、'Create New API Token'を選ぶ。すると、`kaggle.json`がダウンロードされる。これにはユーザー名とAPI Keyが含まれている。
+3. プロジェクトのソースディレクトリ（= 直下）で`bash scripts/download_data.sh`を実行する。すると、`data/titanic`下に`titanic`データセットの`train.csv`と`test.csv`がダウンロードされる。
