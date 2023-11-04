@@ -84,14 +84,22 @@ black, flake8をインストールしていないとvscodeで警告が出るの�
 
 ## kaggle APIを用いたデータのダウンロードのやり方
 
-任意のデータをkaggleからダウンロードして、それをダウンロードフォルダから任意のフォルダに移す...という作業が面倒な場合、
-Kaggle APIを用いて任意のディレクトリにデータを配置することができる。
+任意のデータをKaggleからダウンロードして、それをダウンロードフォルダから任意のフォルダに移す...という  
+作業が面倒な場合、Kaggle APIを用いて任意のディレクトリにデータを配置することができる。
 
-###
+### 手順
 
-1. 仮想環境に入って、kaggle APIを使えるようにする(`pip install kaggle`)。
-2. `https://www.kaggle.com/<username>/account`にアクセスし、`Create New API Token`を選ぶ。すると、`kaggle.json`がダウンロードされる。これにはユーザー名とAPI Keyが含まれている。
-3. プロジェクトのソースディレクトリ（= 直下）で`bash scripts/download_data.sh`を実行する。すると、`data/titanic`下に`titanic`データセットの`train.csv`と`test.csv`がダウンロードされる。
+1. 仮想環境に入って、Kaggle APIを使えるようにする(`pip install kaggle`)。
+2. `https://www.kaggle.com/<username>/account`にアクセスし、`Create New API Token`を選ぶ。  
+すると、`kaggle.json`がダウンロードされる。これにはユーザー名とAPI Keyが含まれている。  
+これをソースディレクトリ(=直下)に配置する。なお、`kaggle.json`の中身は以下の通りである。  
+`{"username":"<username>","key":"<API Key>"}`  
+(`<username>`と`<API Key>`はそれぞれKaggleのユーザー名とAPI Key)
+3. 仮想環境に入って、ソースディレクトリ(=直下)で`bash scripts/download_data.sh`を実行する。  
+ホームディレクトリに`.kaggle/kaggle.json`がない場合、kaggleのユーザー名とAPI Keyが聞かれるので、  
+それぞれ入力すると、ホームディレクトリに`.kaggle/kaggle.json`が作成され、`data/titanic`下に`competition_name`で指定した
+(今回は`titanic`データセット)`train.csv`と`test.csv`がダウンロードされる。  
+ダウンロードするデータセットを変更したい場合、`download_data.sh`の`competition_name`を変更すればいい。
 
 ### スクリプトの解説
 
