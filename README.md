@@ -87,6 +87,52 @@ black, flake8をインストールしていないとvscodeで警告が出るの�
 任意のデータをkaggleからダウンロードして、それをダウンロードフォルダから任意のフォルダに移す...という作業が面倒な場合、
 Kaggle APIを用いて任意のディレクトリにデータを配置することができる。
 
+###
+
 1. 仮想環境に入って、kaggle APIを使えるようにする(`pip install kaggle`)。
-2. `https://www.kaggle.com/<username>/account`にアクセスし、'Create New API Token'を選ぶ。すると、`kaggle.json`がダウンロードされる。これにはユーザー名とAPI Keyが含まれている。
+2. `https://www.kaggle.com/<username>/account`にアクセスし、`Create New API Token`を選ぶ。すると、`kaggle.json`がダウンロードされる。これにはユーザー名とAPI Keyが含まれている。
 3. プロジェクトのソースディレクトリ（= 直下）で`bash scripts/download_data.sh`を実行する。すると、`data/titanic`下に`titanic`データセットの`train.csv`と`test.csv`がダウンロードされる。
+
+### スクリプトの解説
+
+```shell:download_data.sh
+#!/bin/bash
+
+# ホームディレクトリに.kaggle/kaggle.jsonがない場合
+if [[ ! -f ~/.kaggle/kaggle.json ]]; then
+    echo -n "Kaggle username: "
+    read USERNAME
+    echo
+    echo -n "Kaggle API key: "
+    read APIKEY
+
+    mkdir -p ~/.kaggle
+    echo "{\"username\":\"$USERNAME\",\"key\":\"$APIKEY\"}" > ~/.kaggle/kaggle.json # ホームディレクトリに.kaggle/kaggle.jsonを作成
+    chmod 600 ~/.kaggle/kaggle.json
+    # セキュリティのためにchmod 600 ~/.kaggle/kaggle.jsonで、ファイルの読み書きの権限を所有者だけに変更すると良いらしい
+    # これを行わないとkaggleコマンドを叩いた際にwarningが表示される。
+fi
+
+pip install kaggle --upgrade
+
+# コンペティション名を変数で指定
+competition_name="titanic"
+
+# データをダウンロード
+kaggle competitions download -c $competition_name
+
+# titanic.zipを解凍
+unzip titanic.zip
+
+# 保存するディレクトリ名を変数で指定
+data_dir="titanic"
+
+# ディレクトリがない場合、作成する
+mkdir -p "data/$data_dir"
+
+# ファイルをdataディレクトリに移動
+mv gender_submission.csv train.csv test.csv "data/$data_dir"
+
+# 解凍したファイルやzipファイルを削除
+rm titanic.zip
+```
