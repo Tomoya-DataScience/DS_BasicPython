@@ -95,10 +95,15 @@ black, flake8をインストールしていないとvscodeで警告が出るの�
 これをソースディレクトリ(=直下)に配置する。なお、`kaggle.json`の中身は以下の通りである。  
 `{"username":"<username>","key":"<API Key>"}`  
 (`<username>`と`<API Key>`はそれぞれKaggleのユーザー名とAPI Key)
-3. 仮想環境に入って、ソースディレクトリ(=直下)で`bash scripts/download_data.sh`を実行する。  
+3. `https://www.kaggle.com/competitions/competition_name`の`join competition`をクリックして  
+`competition rule`を読み、`I understand accept`を必ずクリックすることに注意する。  
+(これを行わないとスクリプトを実行するときに  
+`403 - Forbidden - You must accept this competition's rules before you'll be able to download files.`と  
+表示され、データがダウンロードできない)。  
+その後、仮想環境に入って、ソースディレクトリ(=直下)で`bash scripts/download_data.sh`を実行する。  
 ホームディレクトリに`.kaggle/kaggle.json`がない場合、kaggleのユーザー名とAPI Keyが聞かれるので、  
-それぞれ入力すると、ホームディレクトリに`.kaggle/kaggle.json`が作成され、`data/$data_dir`  
-(`$data_dir`はデータを保存したいディレクトリ)下に`competition_name`で指定した  
+それぞれ入力すると、ホームディレクトリに`.kaggle/kaggle.json`が作成され、  
+`data/$data_dir`  (`$data_dir`はデータを保存したいディレクトリ)下に`competition_name`で指定した  
 (今回は[https://www.kaggle.com/competitions/titanic](https://www.kaggle.com/competitions/titanic)のtitanicデータセット、
 一般には`https://www.kaggle.com/competitions/competition_name`の`competition_name`の部分を指定すればいい)の  
 `train.csv`と`test.csv`がダウンロードされる。  
@@ -134,7 +139,7 @@ competition_name="titanic"
 kaggle competitions download -c $competition_name
 
 # titanic.zipを解凍
-unzip titanic.zip
+unzip "$competition_name.zip"
 
 # 保存するディレクトリ名を変数で指定
 data_dir="titanic"
@@ -142,9 +147,9 @@ data_dir="titanic"
 # ディレクトリがない場合、作成する
 mkdir -p "data/$data_dir"
 
-# ファイルをdataディレクトリに移動
-mv gender_submission.csv train.csv test.csv "data/$data_dir"
+# ファイルをdataディレクトリに移動(他に移動したいものがあれば別途指定)
+mv train.csv test.csv "data/$data_dir"
 
 # 解凍したファイルやzipファイルを削除
-rm titanic.zip
+rm "$competition_name.zip"
 ```
