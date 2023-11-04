@@ -97,9 +97,11 @@ black, flake8をインストールしていないとvscodeで警告が出るの�
 (`<username>`と`<API Key>`はそれぞれKaggleのユーザー名とAPI Key)
 3. 仮想環境に入って、ソースディレクトリ(=直下)で`bash scripts/download_data.sh`を実行する。  
 ホームディレクトリに`.kaggle/kaggle.json`がない場合、kaggleのユーザー名とAPI Keyが聞かれるので、  
-それぞれ入力すると、ホームディレクトリに`.kaggle/kaggle.json`が作成され、`data/titanic`下に`competition_name`で指定した
-(今回は`titanic`データセット)`train.csv`と`test.csv`がダウンロードされる。  
-ダウンロードするデータセットを変更したい場合、`download_data.sh`の`competition_name`を変更すればいい。
+それぞれ入力すると、ホームディレクトリに`.kaggle/kaggle.json`が作成され、`data/$data_dir`  
+(`$data_dir`はデータを保存したいディレクトリ)下に`competition_name`で指定した(今回は`titanic`データセット)の  
+`train.csv`と`test.csv`がダウンロードされる。  
+ダウンロードするデータセット及びデータを保存したいディレクトリを変更したい場合、  
+それぞれ`download_data.sh`の`competition_name`と`data_dir`を変更すればいい。
 
 ### スクリプトの解説
 
