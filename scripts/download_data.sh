@@ -18,22 +18,22 @@ fi
 pip install kaggle --upgrade
 
 # コンペティション名を変数で指定
-competition_name="titanic"
+competition_name="spaceship-titanic"
 
 # データをダウンロード
 kaggle competitions download -c $competition_name
 
 # titanic.zipを解凍
-unzip titanic.zip
+unzip "$competition_name.zip"
 
 # 保存するディレクトリ名を変数で指定
-data_dir="titanic"
+data_dir="spaceship-titanic"
 
 # ディレクトリがない場合、作成する
 mkdir -p "data/$data_dir"
 
 # ファイルをdataディレクトリに移動
-mv gender_submission.csv train.csv test.csv "data/$data_dir"
+mv train.csv test.csv "data/$data_dir"
 
 # 解凍したファイルやzipファイルを削除
-rm titanic.zip
+rm "$competition_name.zip"
