@@ -6,3 +6,6 @@ imgs/
 
 # kaggle API Key
 kaggle*
+
+# .gitignore
+.gitignore
