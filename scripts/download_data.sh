@@ -14,7 +14,10 @@ fi
 
 pip install kaggle --upgrade
 
-kaggle competitions download -c titanic
+# コンペティション名を変数で指定
+competition_name="titanic"
+
+kaggle competitions download -c $competition_name
 
 # titanic.zipを解凍
 unzip titanic.zip
