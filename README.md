@@ -100,7 +100,7 @@ black, flake8をインストールしていないとvscodeで警告が出るの�
 (これを行わないとスクリプトを実行するときに  
 `403 - Forbidden - You must accept this competition's rules before you'll be able to download files.`と  
 表示され、データがダウンロードできない)。  
-その後、仮想環境に入って、ソースディレクトリ(=直下)で`bash scripts/download_data.sh`を実行する。  
+その後、`env_name`で指定した仮想環境に入って、ソースディレクトリ(=直下)で`bash scripts/download_data.sh`を実行する。  
 ホームディレクトリに`.kaggle/kaggle.json`がない場合、kaggleのユーザー名とAPI Keyが聞かれるので、  
 それぞれ入力すると、ホームディレクトリに`.kaggle/kaggle.json`が作成され、  
 `data/$data_dir`  (`$data_dir`はデータを保存したいディレクトリ)下に`competition_name`で指定した  
