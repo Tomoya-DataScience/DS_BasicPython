@@ -23,23 +23,14 @@ competition_name="spaceship-titanic"
 # データをダウンロード
 kaggle competitions download -c $competition_name
 
-# zipファイルの解凍先を一時的に作成
-mkdir -p "data/tmp"
-
-# titanic.zipを解凍
-unzip "$competition_name.zip" -d "data/tmp"
-
 # データを保存するディレクトリ名を変数で指定
 data_dir="spaceship-titanic"
 
 # データを保存するディレクトリがない場合、作成する
 mkdir -p "data/$data_dir"
 
-# 解凍したファイルをdata/$data_dirに移動
-mv data/tmp/* "data/$data_dir"
+# titanic.zipを解凍
+unzip "$competition_name.zip" -d "data/$data_dir"
 
 # 解凍したzipファイルを削除
 rm "$competition_name.zip"
-
-# 一時ディレクトリを削除
-rm -r data/tmp
