@@ -130,6 +130,11 @@ if [[ ! -f ~/.kaggle/kaggle.json ]]; then
     # これを行わないとkaggleコマンドを叩いた際にwarningが表示される。
 fi
 
+# 仮想環境の名前を指定
+env_name = "kaggle"
+
+source ~/envs/$env_name/bin/activate
+
 pip install kaggle --upgrade
 
 # コンペティション名を変数で指定
